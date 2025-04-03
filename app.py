@@ -26,3 +26,15 @@ def addproduct():
         return redirect(url_for('home'))
     else:
         return notfound()
+    
+@app.errorhandler(404)
+def notfound (error=None):
+    message={
+        'mensaje': 'no encontreado' + request.url,
+        'status': '404 not found'
+    }
+    Response =jsonify(message)
+    Response.status_code=404
+    return Response
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
